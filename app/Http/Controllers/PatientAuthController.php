@@ -54,7 +54,7 @@ class PatientAuthController extends Controller
 
         // Attempt login using the 'patient_profile' guard
         if (Auth::guard('patient_profile')->attempt($credentials)) {
-            return redirect()->route('patient.home');
+            return redirect()->route('patient_profiles.home');
         }
 
         return back()->withErrors(['email' => 'Invalid credentials'])->withInput();

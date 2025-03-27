@@ -33,61 +33,62 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AdminController::class, 'login'])->name('admin.login.post');
-    Route::get('/home', [AdminController::class, 'dashboard'])->name('admin.home');
-    Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
-});
-## -----------------------------------------
-## ✅ Client Home Route (For Patient View)
-## -----------------------------------------
-Route::get('/Homes', [ClientController::class, 'home'])->name('patients.home');
-
-## -----------------------------------------
-## ✅ Patient Routes (Resource CRUD + Custom)
-## -----------------------------------------
-Route::resource('patients', PatientController::class);
-
-/** ✅ Show Newly Added Patients (Last 1 Month) **/
-Route::get('patients-list/new', [PatientController::class, 'newPatients'])
-    ->name('patients.new');
-
     
+   
 
-Route::get('/patients/download', [PatientController::class, 'downloadPdf'])->name('patients.download');
-
-
-/** ✅ Show Single Patient Details **/
-Route::get('/patients/{patient}', [PatientController::class, 'show'])
+     Route::middleware('auth:admin')->group(function () {
+        Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+        Route::get('/home', [AdminController::class, 'dashboard'])->name('admin.home');
+        Route::get('/Homes', [ClientController::class, 'home'])->name('patients.home');
+        Route::resource('patients', PatientController::class);
+        Route::get('patients-list/new', [PatientController::class, 'newPatients'])
+    ->name('patients.new');
+    Route::get('/patients/download', [PatientController::class, 'downloadPdf'])->name('patients.download');
+    Route::get('/patients/{patient}', [PatientController::class, 'show'])
     ->name('patients.show');
-
-  
-/** ✅ This Route Is Automatically Handled by Resource **/
-Route::get('/patients/create', [PatientController::class, 'create'])
-    ->name('patients.create');
-
-
-
-
-## ✅ Referral Routes (For Patient Referrals)
-## -----------------------------------------
-Route::resource('referrals', ReferralController::class);
-
-## -----------------------------------------
-## ✅ Appointment Routes (Create, Store, Edit)
-## -----------------------------------------
-Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+    Route::resource('referrals', ReferralController::class);
+    Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
 Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 Route::delete('/appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
-
-
-/** ✅ Manage Appointment Status (Complete, Cancel, Reschedule) **/
-Route::put('/appointments/{id}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
+    Route::put('/appointments/{id}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
 Route::put('/appointments/{id}/complete', [AppointmentController::class, 'complete'])->name('appointments.complete');
 Route::put('/appointments/{id}/reschedule', [AppointmentController::class, 'reschedule'])->name('appointments.reschedule');
 
 
 Route::resource('patient_sessions', PatientSessionController::class);
 Route::get('/patient-sessions/calendar', [PatientSessionController::class, 'calendar'])->name('patient_sessions.calendar');
+
+
+});
+ });
+
+
+
+
+
+
+    
+
+
+  
+/** ✅ This Route Is Automatically Handled by Resource **/
+
+
+
+
+## ✅ Referral Routes (For Patient Referrals)
+## -----------------------------------------
+
+
+## -----------------------------------------
+## ✅ Appointment Routes (Create, Store, Edit)
+## -----------------------------------------
+
+
+
+/** ✅ Manage Appointment Status (Complete, Cancel, Reschedule) **/
+
 
 ## -----------------------------------------
 ## ✅ Prevent Any Route Cache Issue
@@ -125,7 +126,7 @@ Route::fallback(function () {
 
     // Dashboard/Home Route (After Login)
     Route::get('/home', [PatientAuthController::class, 'home'])
-        ->name('patient.home')
+        ->name('patient_profiles.home')
         ->middleware('auth:patient_profile'); // Apply correct guard
 
     // Logout Route
