@@ -33,27 +33,43 @@ class PatientAuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('patient.login.post')->with('success', 'Registration successful. Please log in.');
+        return redirect()->route('patient.login')->with('success', 'Registration successful. Please log in.');
     }
 
     // Handle login
     public function login(PatientLoginRequest $request)
     {
-        if (Auth::attempt($request->validated())) {
-            return redirect()->route('dashboard');
+        $credentials = $request->only('email', 'password');
+
+        // Check if patient exists
+        $patient = PatientProfile::where('email', $credentials['email'])->first();
+        if (!$patient) {
+            return back()->withErrors(['email' => 'No account found with this email.'])->withInput();
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        // Check if password is correct
+        if (!Hash::check($credentials['password'], $patient->password)) {
+            return back()->withErrors(['password' => 'Incorrect password.'])->withInput();
+        }
+
+        // Attempt login using the 'patient_profile' guard
+        if (Auth::guard('patient_profile')->attempt($credentials)) {
+            return redirect()->route('patient.home');
+        }
+
+        return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
     }
 
-    // Logout
+    // Handle logout
     public function logout()
     {
-        Auth::logout();
-        return redirect()->route('login');
+        Auth::guard('patient_profile')->logout();
+        return redirect()->route('patient.login')->with('success', 'Logged out successfully.');
     }
 
-    public function home(){
+    // Patient home/dashboard
+    public function home()
+    {
         return view('patient_profiles.home');
     }
 }

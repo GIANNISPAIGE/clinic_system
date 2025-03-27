@@ -44,6 +44,10 @@ return [
         'driver' => 'session',
         'provider' => 'admins', // Ensure this matches the provider below
     ],
+    'patient_profile' => [
+        'driver' => 'session',
+        'provider' => 'patient_profiles', // Ensure this matches the provider below
+    ],
     ],
 
     /*
@@ -79,6 +83,10 @@ return [
           'admins' => [
         'driver' => 'eloquent',
         'model' => App\Models\Admin::class, // Ensure it points to your Admin model
+     ],
+      'patient_profiles' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\PatientProfile::class, // Ensure it points to your Admin model
      ]
          ],
 

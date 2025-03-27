@@ -1,4 +1,5 @@
 @extends('components.userroles')
+
 @section('content')
 <div class="flex items-center justify-center min-h-screen bg-green-200 p-6">
     <div class="flex flex-col items-center justify-center w-full max-w-5xl space-y-6">
@@ -28,7 +29,7 @@
 
                 <form action="{{ route('patient.login.post') }}" method="POST">
                     @csrf
-                    <!-- Username -->
+                    <!-- Email -->
                     <div class="mb-4">
                         <label class="block text-gray-600 text-sm font-medium mb-1">Email</label>
                         <div class="relative">
@@ -37,7 +38,7 @@
                                     <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1a4 4 0 008 0V6a4 4 0 00-4-4zm-6 8a6 6 0 0112 0v1a6 6 0 11-12 0v-1z" clip-rule="evenodd"></path>
                                 </svg>
                             </span>
-                            <input type="text" name="username" placeholder="Enter your username" 
+                            <input type="email" name="email" placeholder="Enter your email" 
                                 class="pl-10 p-3 w-full border border-yellow-400 rounded focus:ring-2 focus:ring-green-400 focus:outline-none" required>
                         </div>
                     </div>
@@ -57,8 +58,7 @@
                     </div>
 
                     <!-- Login Button -->
-                    <button type="button" 
-                        onclick="window.location.href='{{ url('/home') }}';"
+                    <button type="submit"
                         class="w-full bg-green-500 text-white py-2 rounded text-center block hover:bg-green-600 transition">
                         Login
                     </button>
@@ -66,7 +66,7 @@
                     <!-- Register Link -->
                     <p class="text-center text-sm text-gray-600 mt-4">
                         Don't have an account? 
-                        <a href="{{ route('patient.register.post') }}" class="text-green-600 font-semibold hover:underline">Register here</a>
+                        <a href="{{ route('patient.register') }}" class="text-green-600 font-semibold hover:underline">Register here</a>
                     </p>
                 </form>
             </div>

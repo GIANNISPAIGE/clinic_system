@@ -1,10 +1,11 @@
-@extends('components.patientSidebar')
-
-@section('title', 'Homes')
+@extends('components.patient') <!-- Ensure you extend the correct layout -->
 
 @section('content')
-    <div class="bg-white p-6 rounded shadow-md">
-        <h2 class="text-2xl font-bold">Welcome to the Patient Management System</h2>
-        <p class="mt-2">Manage patient records efficiently and securely.</p>
-    </div>
+    <h1>Welcome, {{ Auth::user()->firstname }}!</h1>
+    <p>You are logged in.</p>
+
+    <form action="{{ route('patient.logout') }}" method="POST">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
 @endsection

@@ -108,7 +108,8 @@ Route::fallback(function () {
     // Registration Routes
      
 
-    Route::group([], function () {
+   Route::group([], function () {
+    // Registration Routes
     Route::get('/register', function () {
         return view('patient_profiles.register');
     })->name('patient.register');
@@ -119,8 +120,14 @@ Route::fallback(function () {
     Route::get('/login', function () {
         return view('patient_profiles.login');
     })->name('patient.login');
-    Route::post('/home', [PatientAuthController::class, 'home'])->name('dashboard');
-
+    
     Route::post('/login', [PatientAuthController::class, 'login'])->name('patient.login.post');
-   
+
+    // Dashboard/Home Route (After Login)
+    Route::get('/home', [PatientAuthController::class, 'home'])
+        ->name('patient.home')
+        ->middleware('auth:patient_profile'); // Apply correct guard
+
+    // Logout Route
+    Route::post('/logout', [PatientAuthController::class, 'logout'])->name('patient.logout');
 });
