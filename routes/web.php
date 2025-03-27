@@ -62,37 +62,7 @@ Route::get('/patient-sessions/calendar', [PatientSessionController::class, 'cale
 
 });
  });
-
-
-
-
-
-
-    
-
-
-  
-/** ✅ This Route Is Automatically Handled by Resource **/
-
-
-
-
-## ✅ Referral Routes (For Patient Referrals)
-## -----------------------------------------
-
-
-## -----------------------------------------
-## ✅ Appointment Routes (Create, Store, Edit)
-## -----------------------------------------
-
-
-
-/** ✅ Manage Appointment Status (Complete, Cancel, Reschedule) **/
-
-
-## -----------------------------------------
-## ✅ Prevent Any Route Cache Issue
-## -----------------------------------------
+ 
 Route::fallback(function () {
     return redirect('/login');
 });
@@ -109,26 +79,17 @@ Route::fallback(function () {
     // Registration Routes
      
 
-   Route::group([], function () {
-    // Registration Routes
-    Route::get('/register', function () {
-        return view('patient_profiles.register');
-    })->name('patient.register');
-
+  Route::group(['prefix' => 'patient'], function () {
+    Route::get('/register', fn() => view('patient_profiles.register'))->name('patient.register');
     Route::post('/register', [PatientAuthController::class, 'register'])->name('patient.register.post');
-
-    // Login Routes
-    Route::get('/login', function () {
-        return view('patient_profiles.login');
-    })->name('patient.login');
-    
+    Route::get('/login', fn() => view('patient_profiles.login'))->name('patient.login');
     Route::post('/login', [PatientAuthController::class, 'login'])->name('patient.login.post');
-
-    // Dashboard/Home Route (After Login)
-    Route::get('/home', [PatientAuthController::class, 'home'])
-        ->name('patient_profiles.home')
-        ->middleware('auth:patient_profile'); // Apply correct guard
-
-    // Logout Route
-    Route::post('/logout', [PatientAuthController::class, 'logout'])->name('patient.logout');
+    
+    Route::group(['middleware' => ['auth:patient_profile']], function () {
+        Route::get('/home', [PatientAuthController::class, 'home'])->name('patient_profiles.home');
+        Route::post('/logout', [PatientAuthController::class, 'logout'])->name('patient.logout');
+         Route::get('/patient_profiles', [PatientAuthController::class, 'index'])->name('patient_profiles.index');
+        Route::get('/patient_profiles/edit', [PatientAuthController::class, 'edit'])->name('patient_profiles.edit');
+       Route::put('/patient_profiles/', [PatientAuthController::class, 'update'])->name('patient_profiles.update');
+    });
 });

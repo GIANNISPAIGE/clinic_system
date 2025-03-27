@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PatientRegisterRequest;
 use App\Http\Requests\PatientLoginRequest;
 use App\Models\PatientProfile;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -64,12 +65,58 @@ class PatientAuthController extends Controller
     public function logout()
     {
         Auth::guard('patient_profile')->logout();
-        return redirect()->route('patient.login')->with('success', 'Logged out successfully.');
+        return redirect()->route('patient.login.post')->with('success', 'Logged out successfully.');
     }
 
     // Patient home/dashboard
     public function home()
     {
         return view('patient_profiles.home');
+
     }
+  public function index()
+{
+    $patient_profiles = PatientProfile::where('id', Auth::id())->firstOrFail(); // Fetch the authenticated user's profile
+    return view('patient_profiles.index_profile', compact('patient_profiles'));
+}
+
+public function edit()
+{
+    $patient_profiles = PatientProfile::where('id', Auth::id())->firstOrFail(); // Ensure the user is editing their own profile
+    return view('patient_profiles.edit_profile', compact('patient_profiles'));
+}
+
+public function update(Request $request)
+{
+    $patient = PatientProfile::where('id', Auth::id())->firstOrFail();
+
+    $request->validate([
+        'firstname' => 'required|string|max:255',
+        'lastname' => 'required|string|max:255',
+        'birthdate' => 'required|date',
+        'email' => 'required|email|unique:patient_profiles,email,' . Auth::id(),
+        'number' => 'required|string|max:15',
+        'impairments' => 'nullable|string',
+        'brgy' => 'required|string|max:255',
+        'municipality' => 'required|string|max:255',
+        'province' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+        'password' => 'nullable|min:8|confirmed',
+    ]);
+
+    $data = $request->except(['password', 'image']);
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('images', 'public');
+        $data['image'] = $imagePath;
+    }
+
+    if ($request->filled('password')) {
+        $data['password'] = Hash::make($request->password);
+    }
+
+    $patient->update($data);
+
+    return redirect()->route('patient_profiles.index')->with('success', 'Your profile has been updated successfully.');
+}
 }

@@ -16,12 +16,7 @@
                 </svg>
                 <a href="#" class="hover:underline">Dashboard</a>
             </li>
-            <li class="py-2 flex items-center hover:bg-blue-700 rounded-lg p-2 transition">
-                <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm0-4h-2V7h2v8z"></path>
-                </svg>
-                <a href="#" class="hover:underline">Patient Info</a>
-            </li>
+           
             <li class="py-2 flex items-center hover:bg-blue-700 rounded-lg p-2 transition">
                 <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM6 5h12v5H6V5zm12 14H6v-7h12v7z"></path>
@@ -52,11 +47,17 @@
                 </svg>
                 <a href="#" class="hover:underline">Secure Messaging</a>
             </li>
+             <li class="py-2 flex items-center hover:bg-blue-700 rounded-lg p-2 transition">
+                <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm0-4h-2V7h2v8z"></path>
+                </svg>
+                <a href="{{ route('patient_profiles.index') }}" class="hover:underline">Account</a>
+            </li>
             <li class="py-2 flex items-center hover:bg-red-700 rounded-lg p-2 transition">
                 <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19 6h-5V4a3 3 0 0 0-6 0v2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-7 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm5-10H8V4a2 2 0 0 1 4 0v2z"></path>
                 </svg>
-                <a href="{{ route('patient.logout') }}" class="hover:underline">Logout</a>
+                <a href="{{ route('patient.login.post') }}" class="hover:underline">Logout</a>
             </li>
         </ul>
     </div>

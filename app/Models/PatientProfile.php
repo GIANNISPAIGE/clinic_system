@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class PatientProfile extends Authenticatable
 {
     use HasFactory;
-
+ protected $table = 'patient_profiles';
     protected $fillable = [
         'firstname',
         'lastname',
@@ -26,5 +26,10 @@ class PatientProfile extends Authenticatable
     protected $hidden = [
         'password',
     ];
+    public function patientProfile()
+{
+    return $this->hasOne(PatientProfile::class);
+}
+
 }
 
