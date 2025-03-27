@@ -56,7 +56,7 @@
                 <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19 6h-5V4a3 3 0 0 0-6 0v2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-7 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm5-10H8V4a2 2 0 0 1 4 0v2z"></path>
                 </svg>
-                <a href="#" class="hover:underline">Logout</a>
+                <a href="{{ route('patient.logout') }}" class="hover:underline">Logout</a>
             </li>
         </ul>
     </div>

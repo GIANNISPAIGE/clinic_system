@@ -12,7 +12,7 @@
     <div class="flex h-screen">
 
         @if(!isset($hideSidebar) || !$hideSidebar)
-            @include('components.sidebar')
+            @include('components.patientSidebar')
         @endif
 
         <div class="flex-1 flex flex-col">
