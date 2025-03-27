@@ -30,7 +30,7 @@
                     @csrf
                     <!-- Username -->
                     <div class="mb-4">
-                        <label class="block text-gray-600 text-sm font-medium mb-1">Username</label>
+                        <label class="block text-gray-600 text-sm font-medium mb-1">Email</label>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-3 flex items-center text-yellow-500">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
