@@ -1,7 +1,7 @@
 <!-- Sidebar Wrapper -->
 <div class="flex">
     <!-- Sidebar -->
-    <div id="sidebar" class="w-64 bg-gradient-to-b from-teal-700 to-green-500 text-white p-5 fixed h-full transition-transform transform -translate-x-full md:translate-x-0 shadow-lg">
+    <div id="sidebar" class="w-64 bg-gradient-to-b from-teal-700 to-green-800 text-white p-5 fixed h-full transition-transform transform -translate-x-full md:translate-x-0 shadow-lg">
         <!-- Logo and Title -->
         <h2 class="text-xl font-bold flex items-center">
             <img src="{{ asset('asset/melogo.jpg') }}" alt="ASP Logo" class="h-16 w-auto mr-3">
