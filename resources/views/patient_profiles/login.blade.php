@@ -14,7 +14,7 @@
                 <span class="text-lg font-semibold">Back</span>
             </a>
             
-            <h2 class="text-2xl font-bold text-center mb-6 text-green-700">Patient Login</h2>
+            <h2 class="text-2xl font-bold text-center mb-10 text-black-700">Patient Login</h2>
 
             @if (session('error'))
                 <p class="text-red-500 text-sm text-center mb-4">{{ session('error') }}</p>

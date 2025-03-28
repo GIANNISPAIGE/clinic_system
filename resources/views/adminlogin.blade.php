@@ -1,7 +1,8 @@
 @extends('components.userroles')
 
 @section('content')
-<div class="flex items-center justify-center min-h-screenbg-gradient-to-br from-green-700 to-green-700 p-6">
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-700 to-green-700 p-6">
+
     <div class="flex flex-col items-center justify-center w-full max-w-5xl space-y-6">
         <div class="flex flex-col items-center w-full">
             <!-- Login Form -->
