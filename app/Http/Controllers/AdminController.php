@@ -15,24 +15,24 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
-        // Validate input fields
-        $credentials = $request->validate([
+        // Validate input fields and return errors per field
+        $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        // Debugging: Check if the user exists
-        $admin = Admin::where('username', $credentials['username'])->first();
+        // Check if admin exists
+        $admin = Admin::where('username', $request->username)->first();
         if (!$admin) {
-            return back()->with('error', 'Admin not found.');
+            return back()->withErrors(['username' => 'The Username or Password is not Correct.'])->withInput();
         }
 
-        // Attempt login with the correct guard
-        if (Auth::guard('admin')->attempt(['username' => $credentials['username'], 'password' => $credentials['password']])) {
+        // Attempt login
+        if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
             return redirect()->route('patients.home');
         }
 
-        return back()->with('error', 'Invalid credentials.');
+        return back()->withErrors(['password' => 'The Username or Password is not Correct'])->withInput();
     }
 
     public function dashboard()

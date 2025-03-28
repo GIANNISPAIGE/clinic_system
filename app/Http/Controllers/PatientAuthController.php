@@ -45,12 +45,12 @@ class PatientAuthController extends Controller
         // Check if patient exists
         $patient = PatientProfile::where('email', $credentials['email'])->first();
         if (!$patient) {
-            return back()->withErrors(['email' => 'No account found with this email.'])->withInput();
+            return back()->withErrors(['email' => 'Invalid Email or Wrong Password.'])->withInput();
         }
 
         // Check if password is correct
         if (!Hash::check($credentials['password'], $patient->password)) {
-            return back()->withErrors(['password' => 'Incorrect password.'])->withInput();
+            return back()->withErrors(['password' => 'Invalid Email or Wrong Password.'])->withInput();
         }
 
         // Attempt login using the 'patient_profile' guard

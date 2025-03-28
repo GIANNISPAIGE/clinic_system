@@ -7,9 +7,7 @@
         <div class="flex flex-col items-center w-full">
             <!-- Login Form -->
             <div class="bg-white p-8 rounded-lg shadow-md w-full md:w-96 border-t-4 border-white-500">
-                <!-- Back Button with Arrow at the Top -->
-               
-                <h2 class="text-2xl font-bold text-center mb-6 text-black-9git00">Admin Login</h2>
+                <h2 class="text-2xl font-bold text-center mb-6 text-black-900">Admin Login</h2>
 
                 @if (session('error'))
                     <p class="text-red-500 text-sm text-center mb-4">{{ session('error') }}</p>
@@ -29,6 +27,9 @@
                             <input type="text" name="username" placeholder="Enter your username" 
                                 class="pl-10 p-3 w-full border border-green-400 rounded focus:ring-2 focus:ring-green-400 focus:outline-none" required>
                         </div>
+                        @error('username')
+                            <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Password -->
@@ -43,6 +44,9 @@
                             <input type="password" name="password" placeholder="Enter your password" 
                                 class="pl-10 p-3 w-full border border-green-400 rounded focus:ring-2 focus:ring-green-400 focus:outline-none" required>
                         </div>
+                        @error('password')
+                            <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Login Button -->

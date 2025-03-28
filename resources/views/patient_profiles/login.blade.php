@@ -4,9 +4,7 @@
 <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-700 to-green-700 p-6 ">
     <div class="flex flex-col items-center w-full max-w-md">
         
-        <!-- Login Form Container -->
         <div class="bg-white p-8 rounded-lg shadow-lg w-full border-t-4 border-green-600 ">
-            <!-- Back Button -->
             <a href="{{ url('/') }}" class="flex items-center text-gray-600 hover:text-gray-800 mb-6">
                 <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10 15a1 1 0 01-.7-.3l-4-4a1 1 0 010-1.4l4-4a1 1 0 111.4 1.4L7.4 10l3.3 3.3a1 1 0 01-.7 1.7z" clip-rule="evenodd"></path>
@@ -16,14 +14,9 @@
             
             <h2 class="text-2xl font-bold text-center mb-10 text-black-700">Patient Login</h2>
 
-            @if (session('error'))
-                <p class="text-red-500 text-sm text-center mb-4">{{ session('error') }}</p>
-            @endif
-
             <form action="{{ route('patient.login.post') }}" method="POST">
                 @csrf
                 
-                <!-- Email Input -->
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-medium mb-1">Email</label>
                     <div class="relative">
@@ -35,9 +28,11 @@
                         <input type="email" name="email" placeholder="Enter your email" 
                             class="pl-10 p-3 w-full border border-green-400 rounded focus:ring-2 focus:ring-green-500 focus:outline-none" required>
                     </div>
+                    @error('email')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
-                <!-- Password Input -->
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-medium mb-1">Password</label>
                     <div class="relative">
@@ -49,15 +44,16 @@
                         <input type="password" name="password" placeholder="Enter your password" 
                             class="pl-10 p-3 w-full border border-green-400 rounded focus:ring-2 focus:ring-green-500 focus:outline-none" required>
                     </div>
+                    @error('password')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
-                <!-- Login Button -->
                 <button type="submit"
                     class="w-full bg-green-600 text-white py-2 rounded text-center block hover:bg-green-700 transition">
                     Login
                 </button>
 
-                <!-- Register Link -->
                 <p class="text-center text-sm text-gray-600 mt-4">
                     Don't have an account? 
                     <a href="{{ route('patient.register') }}" class="text-green-600 font-semibold hover:underline">Register here</a>
