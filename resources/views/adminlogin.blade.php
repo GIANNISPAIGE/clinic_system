@@ -7,7 +7,7 @@
         <div class="flex flex-col items-center w-full">
             <!-- Login Form -->
             <div class="bg-white p-8 rounded-lg shadow-md w-full md:w-96 border-t-4 border-white-500">
-                <h2 class="text-2xl font-bold text-center mb-6 text-black-900">Admin Login</h2>
+                <h2 class="text-2xl font-bold text-center mb-6 text-black-900">Login</h2>
 
                 @if (session('error'))
                     <p class="text-red-500 text-sm text-center mb-4">{{ session('error') }}</p>

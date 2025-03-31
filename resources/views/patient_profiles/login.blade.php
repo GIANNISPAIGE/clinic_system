@@ -12,7 +12,7 @@
                 <span class="text-lg font-semibold">Back</span>
             </a>
             
-            <h2 class="text-2xl font-bold text-center mb-10 text-black-700">Patient Login</h2>
+            <h2 class="text-2xl font-bold text-center mb-10 text-black-700">Login</h2>
 
             <form action="{{ route('patient.login.post') }}" method="POST">
                 @csrf
