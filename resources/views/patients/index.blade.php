@@ -34,17 +34,17 @@
                                 {{ $patient->firstname }} {{ $patient->lastname }}
                             </a>
                         </td>
-                        <td class="border p-4 text-center space-x-3">
-                            <a href="{{ route('patients.edit', $patient) }}" class="text-green-500 hover:opacity-75">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 inline" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M17.414 2.586a2 2 0 00-2.828 0L4 13.172V16h2.828l10.586-10.586a2 2 0 000-2.828zM14 4l2 2-9.172 9.172H5v-2.828L14 4z" />
+                        <td class="border p-4 text-center space-x-3 flex justify-center items-center">
+                            <a href="{{ route('patients.edit', $patient) }}" class="text-green-500 hover:opacity-75" title="Edit">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M4 20h16v2H4v-2zm16.728-13.555l-2.173-2.173a2 2 0 0 0-2.83 0l-8.719 8.719a2 2 0 0 0-.492.855L6 17.82V20h2.18l1.975-.515a2 2 0 0 0 .855-.492l8.719-8.719a2 2 0 0 0 0-2.83zM15 5.585l3.415 3.415-1.414 1.414L13.586 7l1.414-1.415z"/>
                                 </svg>
                             </a>
-                            <form action="{{ route('patients.destroy', $patient) }}" method="POST" class="inline">
+                            <form action="{{ route('patients.destroy', $patient) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this patient?');">
                                 @csrf @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:opacity-75">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 inline" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M6 8a1 1 0 011-1h6a1 1 0 011 1v7a1 1 0 01-1 1H7a1 1 0 01-1-1V8zm3-5a1 1 0 011 1h2a1 1 0 011-1h3a1 1 0 110 2H4a1 1 0 110-2h3z" clip-rule="evenodd" />
+                                <button type="submit" class="text-red-500 hover:opacity-75" title="Delete">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 3V4H4V6h16V4h-5V3h-6zm-4 6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9H5zm4 3h2v7H9v-7zm4 0h2v7h-2v-7z"/>
                                     </svg>
                                 </button>
                             </form>
